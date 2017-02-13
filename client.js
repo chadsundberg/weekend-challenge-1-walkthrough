@@ -16,5 +16,14 @@ $('#employeeTableBody').append(
       '<td>' + annualSalary + '</td>' +
     '</tr>'
     );
+
+// add monthly salary expenses to the DOM
+var newEmployeeMonthlyExpenses = annualSalary / 12;
+var previousMonthlyExpenses  = $('#monthlyExpenses').text(); // for this to work, we had to set the value to 0 in HTML
+var totalMonthlyExpenses = parseFloat(previousMonthlyExpenses) + parseFloat(newEmployeeMonthlyExpenses);
+$('#monthlyExpenses').text(totalMonthlyExpenses); // if we pass something into .text(), it will replace whatever was there.
+
+
+
   });
 });
