@@ -29,7 +29,15 @@ $('#monthlyExpenses').text(totalMonthlyExpenses); // if we pass something into .
   });
   // class has to be used for employee button because there are many of them
   $('#employeeTableBody').on('click', '.deleteEmployeeButton', function(){
+    // removing employee salary from total before employee row is deleted and storing it in a new variable.
+    var deletedEmployeeSalary = $(this).parent().prev().text();
+    var deletedEmployeeMonthlyExpenses = deletedEmployeeSalary / 12;
+    var previousMonthlyExpenses = $('#monthlyExpenses').text();
+    var newTotalMonthlyExpenses = previousMonthlyExpenses - deletedEmployeeMonthlyExpenses;  // parseFloat is not needed here because subtraction doesn't behave like concatenation
+    $('#monthlyExpenses').text(newTotalMonthlyExpenses);
+
     $(this).parent().parent().remove();
     // $(this).closest('tr').remove();  // this can also work
+
   });
 });
