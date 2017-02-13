@@ -14,9 +14,9 @@ $('#employeeTableBody').append(
       '<td>' + idNumber + '</td>' +
       '<td>' + jobTitle + '</td>' +
       '<td>' + annualSalary + '</td>' +
-      '<td><button class="deleteEmployeeButton">Delete</button></td>' +
+      '<td><button class="deleteEmployeeButton" data-salary="' + annualSalary + '">Delete</button></td>' +
     '</tr>'
-    );
+  );  // data(), can be stored on the DOM.
 
 // add monthly salary expenses to the DOM
 var newEmployeeMonthlyExpenses = annualSalary / 12;
@@ -30,7 +30,7 @@ $('#monthlyExpenses').text(totalMonthlyExpenses); // if we pass something into .
   // class has to be used for employee button because there are many of them
   $('#employeeTableBody').on('click', '.deleteEmployeeButton', function(){
     // removing employee salary from total before employee row is deleted and storing it in a new variable.
-    var deletedEmployeeSalary = $(this).parent().prev().text();
+    var deletedEmployeeSalary = $(this).data('salary'); // .prev() goes to the next cell past the parent element's cell.
     var deletedEmployeeMonthlyExpenses = deletedEmployeeSalary / 12;
     var previousMonthlyExpenses = $('#monthlyExpenses').text();
     var newTotalMonthlyExpenses = previousMonthlyExpenses - deletedEmployeeMonthlyExpenses;  // parseFloat is not needed here because subtraction doesn't behave like concatenation
